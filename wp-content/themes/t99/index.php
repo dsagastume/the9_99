@@ -1,1 +1,0 @@
-<?php load_template ( get_template_directory () . '/home.php', false ) ; ?>

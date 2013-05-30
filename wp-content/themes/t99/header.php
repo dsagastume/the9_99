@@ -6,8 +6,17 @@
         <title><?php site_title(); ?></title>
         <link rel="profile" href="http://gmpg.org/xfn/11" />
         <link rel="pingback" href="<?php bloginfo ( 'pingback_url' ); ?>" />
-        <link rel="icon" type="image/ico" href="<?php echo theme_url ( 'img/favicon.ico' ); ?>">
+        <link rel="icon" type="image/ico" href="<?php echo theme_url ( 'img/favicon.ico' ); ?>">        
         <?php wp_head (); ?>
+
+        <?php
+            if ( is_home() ) {
+                ?>
+                <link rel='stylesheet' id='vegas-style-css'  href='http://localhost/the9_99/wp-content/themes/t99/css/vendor/jquery.vegas.css?ver=3.5.1' type='text/css' media='all' /> 
+                <script type='text/javascript' src='http://localhost/the9_99/wp-content/themes/t99/js/vendor/jquery.vegas.js?ver=3.5.1'></script>
+                <?php 
+            } 
+        ?>
         <script type="text/javascript">
           var Server = Server || { } ;
         // Misc Data
@@ -29,11 +38,11 @@
     </head>
     <body <?php body_class (); ?> data-language="<?php bloginfo ( 'language' ); ?>">
         <div id="header">            
-            <a id="logo">the 9.99</a>        
+            <a id="logo" href="http://dsagastume.info/the9_99/"><span>the 9.99</span></a>        
             <a id="nav_toggle"><span>menu</span></a>            
             <nav>
                 <ul>
-                    <li><a>artists</a></li>
+                    <li><a href="<?php echo get_post_type_archive_link( 'artists' ); ?>">artists</a></li>
                     <li><a>exhibitions</a></li>
                     <li><a>publications</a></li>
                     <li><a>outdoors</a></li>
@@ -42,4 +51,4 @@
                 </ul>
             </nav>
         </div>
-        <div id="content">
+        <div id="main-content">

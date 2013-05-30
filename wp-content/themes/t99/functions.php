@@ -32,38 +32,40 @@ function t99_init () {
   //add_image_size( 'single-thumb', 313, 220, true );
   
   /**
-   * Create "Vivienda" Post Type
+   * Create "Artists" Post Type
    */
-  // $labels = array (
-  //   'name' => 'Viviendas',
-  //   'singular_name' => 'Vivienda',
-  //   'add_new' => 'Agregar Nueva',
-  //   'add_new_item' => 'Agregar Nueva Vivienda',
-  //   'edit_item' => 'Editar Vivienda',
-  //   'new_item' => 'Nueva Vivienda',
-  //   'all_items' => 'Todas las viviendas',
-  //   'view_item' => 'Ver Vivienda',
-  //   'search_items' => 'Buscar Viviendas',
-  //   'not_found' => 'No se encontraron viviendas',
-  //   'not_found_in_trash' => 'No se encontraron viviendas en la papelera',
-  //   'parent_item_colon' => '',
-  //   'menu_name' => 'Viviendas'
-  //     ) ;
+  $labels = array (
+    'name' => 'Artists',
+    'singular_name' => 'Artist',
+    'add_new' => 'Add New',
+    'add_new_item' => 'Add New Artist',
+    'edit_item' => 'Edit Artist',
+    'new_item' => 'New Artist',
+    'all_items' => 'All the Artists',
+    'view_item' => 'View Artist',
+    'search_items' => 'Search Artists',
+    'not_found' => 'Artists not found',
+    'not_found_in_trash' => 'Artists not found in trash',
+    'parent_item_colon' => '',
+    'menu_name' => 'Artists'
+      ) ;
 
-  // $args = array (
-  //   'labels' => $labels,
-  //   'public' => true,
-  //   'publicly_queryable' => true,
-  //   'show_ui' => true,
-  //   'show_in_menu' => true,
-  //   'query_var' => true,
-  //   'capability_type' => 'post',
-  //   'has_archive' => true,
-  //   'hierarchical' => false,
-  //   'menu_position' => null,
-  //   'supports' => array ( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields' )
-  //     ) ;  
-  // register_post_type ( 'vivienda', $args ) ;
+  $args = array (
+    'labels' => $labels,
+    'public' => true,
+    'publicly_queryable' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'query_var' => true,
+    'capability_type' => 'post',
+    'has_archive' => true,
+    'rewrite' => true,
+    'hierarchical' => true,
+    'menu_position' => null,
+
+    'supports' => array ( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields' )
+      ) ;  
+  register_post_type ( 'artists', $args ) ;
 
 
 }
@@ -192,12 +194,12 @@ function t99_scripts_styles () {
 
   wp_enqueue_style ( 'fonts-style', 'http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,600') ;
   wp_enqueue_style ( 't99-style', get_stylesheet_uri (), array ('fonts-style')) ;
-  wp_enqueue_style ( 'vegas-style', get_template_directory_uri ().'/css/vendor/jquery.vegas.css') ;
+  //wp_enqueue_style ( 'vegas-style', get_template_directory_uri ().'/css/vendor/jquery.vegas.css') ;
 
   //wp_enqueue_script ( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', array ( ) ) ;
   wp_enqueue_script ( 'jquery-ui-min', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js', array ('jquery') ) ;
 
-  wp_enqueue_script ( 'vegas-script', get_template_directory_uri () . '/js/vendor/jquery.vegas.js', array ('jquery') ) ;
+  //wp_enqueue_script ( 'vegas-script', get_template_directory_uri () . '/js/vendor/jquery.vegas.js', array ('jquery') ) ;
 
   wp_enqueue_script ( 't99-script', get_template_directory_uri () . '/js/main.js', array ('jquery') ) ;
   
@@ -245,30 +247,30 @@ echo "                { src:'".$imageSrc."', fade:4000 },";
     }
 }
 
-// function getPostImages() {
-//     $args = array( 
-//     'post_parent' => get_the_ID(),
-//     'post_type' => 'attachment',
-//     'post_mime_type' => 'image',
-//     'posts_per_page'=>-1
-//     );
-//     $images  = get_posts($args);
-//     foreach ($images as $image) {    
-//         $attachmenturl=wp_get_attachment_url($image->ID);
-//         $description= $image->post_content;
-//         $caption= $image->post_excerpt;
-//         $attr = array(
-//           'class' => "absolute",
-//           'data-type' => $term->slug
-//         );
-//         $imageSrc = wp_get_attachment_image_src( $image->ID, 'large', False);
-//         $imageSrc = $imageSrc[0];
-//         echo '<a class="unprocessable-link" data-milkbox="gal1" href="'.$imageSrc.'"> <div class="item single-item float-left">';
-//         echo wp_get_attachment_image( $image->ID, 'single-thumb', False, $attr );
-//         echo '</div></a>';
-//         //echo '<img class="slide absolute transition-margin-left transition-width" data-type="'.$term->slug.'" src="'.$attachmenturl.'"></img>' . "\n";
-//     }
-// }
+function getPostImages() {
+    $args = array( 
+    'post_parent' => get_the_ID(),
+    'post_type' => 'attachment',
+    'post_mime_type' => 'image',
+    'posts_per_page'=>-1
+    );
+    $images  = get_posts($args);
+    foreach ($images as $image) {    
+        $attachmenturl=wp_get_attachment_url($image->ID);
+        $description= $image->post_content;
+        $caption= $image->post_excerpt;
+        $attr = array(
+          // 'class' => "absolute",
+          // 'data-type' => $term->slug
+        );
+        $imageSrc = wp_get_attachment_image_src( $image->ID, 'full', False);
+        $imageSrc = $imageSrc[0];
+        echo '<li><a>';
+        echo '<img src="'.$imageSrc.'">';
+        echo '</a></li>';
+        //echo '<img class="slide absolute transition-margin-left transition-width" data-type="'.$term->slug.'" src="'.$attachmenturl.'"></img>' . "\n";
+    }
+}
 
 
 

@@ -7,32 +7,26 @@
 
 <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,600' rel='stylesheet' type='text/css'>
 <link href="style.css" rel="stylesheet" type="text/css">
-<link href="jquery.vegas.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script type="text/javascript" src="jquery.vegas.js"></script>
+<script type="text/javascript" src="jquery.backstretch.min.js"></script>
+<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 
 <script>
 $(document).ready(function() {
-	$.vegas.defaults = {
-		background: {
-			loading:false
-		}
-	}
-	$.vegas('slideshow', {
-//		loading:false,
-		preload:true,
-		delay:16000,
-		backgrounds:[
-			{ src:'resources/1.jpg', fade:4000 },
-			{ src:'resources/2.jpg', fade:4000 },
-			{ src:'resources/3.jpg', fade:4000 },
-			{ src:'resources/4.jpg', fade:4000 },
-			{ src:'resources/5.jpg', fade:4000 },
-		]
+	$.backstretch([
+		"resources/1.jpg",
+		"resources/2.jpg",
+		"resources/3.jpg",
+		"resources/4.jpg"
+	], {
+		fade: 1000,
+		duration: 4000
 	});
 });
+
+
 </script>
 
 </head>
@@ -40,27 +34,25 @@ $(document).ready(function() {
 <body>
 
 <div id="header">
-    
         <a id="logo" href="http://dsagastume.info/the9_99/"><span>the 9.99</span></a>
-    
-        <a id="nav_toggle"><span>menu</span></a>
         
+        <ul class="lang-nav">
+            <li><a>eng</a></li>
+            <li><a>esp</a></li>
+        </ul>
+        
+        <a id="nav_toggle"><span>menu</span></a>
+
         <nav>
-            <ul>
+            <ul class="main-navigation">
                 <li><a href="artists/">artists</a></li>
-                <li><a>exhibitions</a></li>
+                <li><a href="exhibitions/">exhibitions</a></li>
                 <li><a>publications</a></li>
                 <li><a>outdoors</a></li>
                 <li><a>gallery</a></li>
                 <li><a>contact</a></li>
-                <li><a>en</a></li>
-                <li><a>es</a></li>
             </ul>
         </nav>
-</div>
-
-<div id="content">
-
 </div>
 
 </body>

@@ -65,8 +65,45 @@ function t99_init () {
       ) ;  
   register_post_type ( 'artists', $args ) ;
 
+  $labels = array (
+    'name' => 'Exhibitions',
+    'singular_name' => 'Exhibition',
+    'add_new' => 'Add New',
+    'add_new_item' => 'Add New Exhibition',
+    'edit_item' => 'Edit Exhibition',
+    'new_item' => 'New Exhibition',
+    'all_items' => 'All the Exhibitions',
+    'view_item' => 'View Exhibition',
+    'search_items' => 'Search Exhibitions',
+    'not_found' => 'Exhibitions not found',
+    'not_found_in_trash' => 'Exhibitions not found in trash',
+    'parent_item_colon' => '',
+    'menu_name' => 'Exhibitions'
+      ) ;
+
+  $args = array (
+    'labels' => $labels,
+    'public' => true,
+    'publicly_queryable' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'query_var' => true,
+    'capability_type' => 'post',
+    'has_archive' => true,
+    'rewrite' => true,
+    'hierarchical' => true,
+    'menu_position' => null,
+
+    'supports' => array ( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields' )
+      ) ;  
+  register_post_type ( 'exhibitions', $args ) ;
+
+
+ register_taxonomy( 'categories', 'exhibitions', array( 'hierarchical' => true, 'label' => 'Categories', 'query_var' => true, 'rewrite' => true ) );
 
 }
+
+
 
 add_action ( 'init', 't99_init' ) ;
 
@@ -213,20 +250,13 @@ function getSlideScript() {
     'post_mime_type' => 'image',
     'posts_per_page'=>-1
     );
+
     $images  = get_posts($args);
     if (!empty($images))  {
       ?>
         <script>
           $(document).ready(function() {
-            $.vegas.defaults = {
-              background: {
-                loading:false
-              }
-            }
-            $.vegas('slideshow', {
-              preload:true,
-              delay:16000,
-              backgrounds:[             
+            $.backstretch([             
       <?php
       foreach ($images as $image) {    
         $attachmenturl=wp_get_attachment_url($image->ID);
@@ -234,13 +264,15 @@ function getSlideScript() {
         $caption= $image->post_excerpt;
         $imageSrc = wp_get_attachment_image_src( $image->ID, 'full');
         $imageSrc = $imageSrc[0];
-echo "                { src:'".$imageSrc."', fade:4000 },";
+echo '    "'.$imageSrc.'",'."\n";
       }
       ?>
-            ]
+            ], {
+              fade: 1000,
+              duration: 4000
+            });
           });
-        }); 
-        </script>    
+      </script>
       <?php 
     }
 }

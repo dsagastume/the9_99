@@ -48,6 +48,8 @@
                     <li><a>outdoors</a></li>
                     <li><a>gallery</a></li>
                     <li><a>contact</a></li>
+                    <li><a>en</a></li>
+                    <li><a>es</a></li>                    
                 </ul>
             </nav>
         </div>

@@ -2,32 +2,32 @@
 
 add_theme_support( "post-thumbnails" );
 
-// function wordpress_head_cleanup() {
-//   remove_action('wp_head', 'feed_links', 2);
-//   remove_action('wp_head', 'feed_links_extra', 3);
-//   remove_action('wp_head', 'rsd_link');
-//   remove_action('wp_head', 'wlwmanifest_link');
-//   remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-//   remove_action('wp_head', 'wp_generator');
-//   remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
-//   remove_action('wp_head', 'index_rel_link');
-//   remove_action('wp_head', 'start_post_rel_link', 10, 0);
-//   remove_action('wp_head', 'parent_post_rel_link', 10, 0);
+function wordpress_head_cleanup() {
+  remove_action('wp_head', 'feed_links', 2);
+  remove_action('wp_head', 'feed_links_extra', 3);
+  remove_action('wp_head', 'rsd_link');
+  remove_action('wp_head', 'wlwmanifest_link');
+  remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+  remove_action('wp_head', 'wp_generator');
+  remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+  remove_action('wp_head', 'index_rel_link');
+  remove_action('wp_head', 'start_post_rel_link', 10, 0);
+  remove_action('wp_head', 'parent_post_rel_link', 10, 0);
 
-//   global $wp_widget_factory;
-//   remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
+  global $wp_widget_factory;
+  remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
 
-//   add_filter('use_default_gallery_style', '__return_null');
-// }
+  add_filter('use_default_gallery_style', '__return_null');
+}
 
-// add_action('init', 'wordpress_head_cleanup');
+add_action('init', 'wordpress_head_cleanup');
 
 function t99_init () {
 
   /**
   * Registrar tamaño de imagen
   */
-  //add_image_size( 'single-thumb', 313, 220, true );
+  add_image_size( 'single-thumb', 248, 181, true );
   
   /**
    * Create "Artists" Post Type
@@ -282,11 +282,12 @@ function getPostImages() {
     'post_parent' => get_the_ID(),
     'post_type' => 'attachment',
     'post_mime_type' => 'image',
-    'posts_per_page'=>-1
+    'posts_per_page'=>-1,
+    'order' => 'asc'
     );
     $images  = get_posts($args);
     foreach ($images as $image) {    
-        $attachmenturl=wp_get_attachment_url($image->ID);
+        $attachmenturl=get_attachment_link($image->ID);
         $description= $image->post_content;
         $caption= $image->post_excerpt;
         $attr = array(
@@ -295,75 +296,102 @@ function getPostImages() {
         );
         $imageSrc = wp_get_attachment_image_src( $image->ID, 'full', False);
         $imageSrc = $imageSrc[0];
-        echo '<li><a>';
+        echo '<li><a href='.$attachmenturl.'>';
         echo '<img src="'.$imageSrc.'">';
         echo '</a></li>';
         //echo '<img class="slide absolute transition-margin-left transition-width" data-type="'.$term->slug.'" src="'.$attachmenturl.'"></img>' . "\n";
     }
 }
 
+function getExhibitionItems() {
+    $args = array( 
+    'post_type' => 'exhibitions',
+    'posts_per_page'=>-1,
+    'order' => 'asc'
+    );
+    $exhibitions  = get_posts($args);
+    foreach ($exhibitions as $exhibition) {    
+        $exhibitionUrl=get_permalink($exhibition->ID);
+        $title= get_the_title($exhibition->ID);
+        $date = get_post_meta ( $exhibition->ID, '_data_input', true );
+        $attr = array(
+          // 'class' => "absolute",
+          // 'data-type' => $term->slug
+        );
+        $imageSrc = get_the_post_thumbnail( $exhibition->ID, 'single-thumb');
+        echo '<li><a href='.$exhibitionUrl.'>';
+        echo '<div>';
+        echo '<p>'.$title.'</p>';
+        echo '<p><span>'.$date.'</span></p>';
+        echo '</div>';
+        echo $imageSrc;
+        echo '</a></li>';
+        //echo '<img class="slide absolute transition-margin-left transition-width" data-type="'.$term->slug.'" src="'.$attachmenturl.'"></img>' . "\n";
+    }
+}
 
 
 /********************************************* METABOX **************************************/
 /**
  * Adds a metabox in the post edit page
  */
-// function data_add_metabox () {
-//   $post_types = array ( 'vivienda', 'desarrollo', 'geotecnia' );
-//   foreach ( $post_types as $type ) {
-//     add_meta_box ( 'data_metabox', 
-//               __ ( 'Datos de Proyecto', 't99' ), 
-//               'data_create_metabox', $type );
-//   }
-// }
+function data_add_metabox () {
+  $post_types = array ( 'exhibitions' );
+  foreach ( $post_types as $type ) {
+    add_meta_box ( 'data_metabox', 
+              __ ( 'Exhibition Duration', 't99' ), 
+              'data_create_metabox', $type );
+  }
+}
 
-// // hook the add_meta_boxes action: data_add_metabox()
-// add_action ( 'add_meta_boxes', 'data_add_metabox' );
+// hook the add_meta_boxes action: data_add_metabox()
+add_action ( 'add_meta_boxes', 'data_add_metabox' );
 
-// /**
-//  * Renders the text editor in the data metabox
-//  * @param stdClass $post 
-//  */
-// function data_create_metabox ( $post ) {
-//   $data_content = get_post_meta ( $post -> ID, '_data_input', true );
-//     wp_editor ( $data_content, 'datainput', array (
-//     'media_buttons' => false,
-//   ) );
-// }
+/**
+ * Renders the text editor in the data metabox
+ * @param stdClass $post 
+ */
+function data_create_metabox ( $post ) {
+  $data_content = get_post_meta ( $post -> ID, '_data_input', true );
+    wp_editor ( $data_content, 'datainput', array (
+    'media_buttons' => false,
+  ) );
+}
 
-// *
-//  * Saves the data info as a metadata value of the post
-//  * @global stdClass $post
-//  * @param array $data
-//  * @param array $postarr
-//  * @return array 
- 
-// function data_filter_handler ( $data, $postarr ) {
-//   global $post;
-//   if ( isset ( $postarr[ 'datainput' ] ) ) {
-//     update_post_meta ( $post -> ID, '_data_input', $postarr[ 'datainput' ] );
-//   }
-//   return $data;
-// }
+/**
+ * Saves the data info as a metadata value of the post
+ * @global stdClass $post
+ * @param array $data
+ * @param array $postarr
+ * @return array 
+ */
 
-// // hook the post edit/create/update action: data_filter_handler()
-// add_filter ( 'wp_insert_post_data', 'data_filter_handler', '99', 2 );
+function data_filter_handler ( $data, $postarr ) {
+  global $post;
+  if ( isset ( $postarr[ 'datainput' ] ) ) {
+    update_post_meta ( $post -> ID, '_data_input', $postarr[ 'datainput' ] );
+  }
+  return $data;
+}
 
-// /**
-//  *
-//  * @param type $post_id
-//  * @return type 
-//  */
-// function data_get_the_content ( $post_id = null ) {
-//   $post_id = ( null === $post_id ) ? get_the_ID () : $post_id;
-//     $content = get_post_meta ( $post_id, '_data_input', true );
-//   return wpautop($content);
-// }
+// hook the post edit/create/update action: data_filter_handler()
+add_filter ( 'wp_insert_post_data', 'data_filter_handler', '99', 2 );
 
-// /**
-//  *
-//  * @param int $post_id 
-//  */
-// function data_the_content ( $post_id ) {
-//   echo data_get_the_content ( $post_id );
-// }
+/**
+ *
+ * @param type $post_id
+ * @return type 
+ */
+function data_get_the_content ( $post_id = null ) {
+  $post_id = ( null === $post_id ) ? get_the_ID () : $post_id;
+    $content = get_post_meta ( $post_id, '_data_input', true );
+  return wpautop($content);
+}
+
+/**
+ *
+ * @param int $post_id 
+ */
+function data_the_content ( $post_id ) {
+  echo data_get_the_content ( $post_id );
+}

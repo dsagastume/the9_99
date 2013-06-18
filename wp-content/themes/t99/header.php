@@ -37,7 +37,7 @@ getSlideScript();
 </head>
 <body <?php body_class (); ?> data-language="<?php bloginfo ( 'language' ); ?>">
 <div id="header">            
-<a id="logo" href="http://dsagastume.info/the9_99/"><span>the 9.99</span></a>        
+<a id="logo" href="<?php echo site_url (); ?>"><span>the 9.99</span></a>        
 
 <ul class="lang-nav">
     <li><a>eng</a></li>
@@ -48,7 +48,7 @@ getSlideScript();
 <nav>
 <ul>
     <li><a href="<?php echo get_post_type_archive_link( 'artists' ); ?>">artists</a></li>
-    <li><a>exhibitions</a></li>
+    <li><a href="<?php echo get_post_type_archive_link( 'exhibitions' ); ?>">exhibitions</a></li>
     <li><a>publications</a></li>
     <li><a>outdoors</a></li>
     <li><a>gallery</a></li>

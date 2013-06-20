@@ -10,7 +10,7 @@
 
 <?php wp_head (); ?>        
 <?php
-if ( is_home() ) {
+if ( is_home() || is_page( $page = 'gallery' ) ) {
 ?>
 <script type="text/javascript" src="<?php echo theme_url ('js/vendor/jquery.backstretch.min.js'); ?>"></script>
 <?php 
@@ -31,8 +31,14 @@ Server.url.ajax = '<?php echo admin_url ( 'admin-ajax.php' ); ?>' ;
 </script>
 <?php
 if ( is_home() ) {
-getSlideScript(); 
+	getSlideScript(); 
 } 
+if (is_page( $page = 'gallery' )) {
+	getGalleryScript();
+}
+if (is_page( $page = 'contact' )) {
+	getContactScript();
+}
 ?>
 </head>
 <body <?php body_class (); ?> data-language="<?php bloginfo ( 'language' ); ?>">
@@ -49,10 +55,17 @@ getSlideScript();
 <ul>
     <li><a href="<?php echo get_post_type_archive_link( 'artists' ); ?>">artists</a></li>
     <li><a href="<?php echo get_post_type_archive_link( 'exhibitions' ); ?>">exhibitions</a></li>
+<<<<<<< HEAD
+    <!-- <li><a >publications</a></li> -->
+    <li><a href="<?php home_url( 'outdoors')?>">outdoors</a></li>
+    <li><a href="<?php home_url( 'gallery')?>">gallery</a></li>
+    <li><a href="<?php home_url( 'contact')?>">contact</a></li>
+=======
     <li><a>publications</a></li>
     <li><a>outdoors</a></li>
     <li><a>gallery</a></li>
     <li><a>contact</a></li>
+>>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
 </ul>
 </nav>
 </div>

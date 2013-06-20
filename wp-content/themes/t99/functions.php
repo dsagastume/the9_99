@@ -243,6 +243,9 @@ function t99_scripts_styles () {
 
 add_action ( 'wp_enqueue_scripts', 't99_scripts_styles' ) ;
 
+/**
+ * Dinamically adds home slideshow
+ */
 function getSlideScript() {
     $args = array( 
     'post_parent' => 2,
@@ -276,8 +279,79 @@ echo '    "'.$imageSrc.'",'."\n";
       <?php 
     }
 }
+/**
+ * Dinamically adds gallery slideshow
+ */
+function getGalleryScript() {
+    $args = array( 
+    'post_parent' => 109,
+    'post_type' => 'attachment',
+    'post_mime_type' => 'image',
+    'posts_per_page'=>-1
+    );
 
-function getPostImages() {
+    $images  = get_posts($args);
+    if (!empty($images))  {
+      ?>
+        <script>
+          $(document).ready(function() {
+            $(".gallery-images").backstretch([             
+      <?php
+      foreach ($images as $image) {    
+        $attachmenturl=wp_get_attachment_url($image->ID);
+        $description= $image->post_content;
+        $caption= $image->post_excerpt;
+        $imageSrc = wp_get_attachment_image_src( $image->ID, 'full');
+        $imageSrc = $imageSrc[0];
+echo '    "'.$imageSrc.'",'."\n";
+      }
+      ?>
+            ], {
+              fade: 1000,
+              duration: 4000
+            });
+          });
+      </script>
+      <?php 
+    }
+}
+
+function getContactScript() {
+  ?>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script>
+$(document).ready(function(e) {
+if ($("#map").length == 1) {
+    var mapCanvas = document.getElementById('map');
+    var latLng = new google.maps.LatLng(14.638255,-90.515451);
+    var mapOptions = {
+      center: latLng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+    
+    var markerShadow = {
+      url: '<?php echo theme_url ("img/marker_shadow.png" ); ?>',
+      anchor: new google.maps.Point(20, 65)
+    };
+  
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      icon: '<?php echo theme_url ("img/marker.png" ); ?>',
+//      shadow: markerShadow
+    });
+  }
+  });
+</script>
+  <?php
+}
+/**
+ * Prints the artist works html
+ * @return html
+ */
+function getArtistWorks() {
     $args = array( 
     'post_parent' => get_the_ID(),
     'post_type' => 'attachment',
@@ -303,6 +377,13 @@ function getPostImages() {
     }
 }
 
+<<<<<<< HEAD
+/**
+ * Prints the exhibition items
+ * @return html
+ */
+=======
+>>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
 function getExhibitionItems() {
     $args = array( 
     'post_type' => 'exhibitions',
@@ -330,6 +411,75 @@ function getExhibitionItems() {
     }
 }
 
+/**
+ * Prints the exhibition works
+ * @return string 
+ */
+function getExhibitionWorks() {
+    $args = array( 
+    'post_parent' => get_the_ID(),
+    'post_type' => 'attachment',
+    'post_mime_type' => 'image',
+    'posts_per_page'=>-1,
+    'attachment_category' => 'work',
+    'order' => 'asc'
+    );
+    $images  = get_posts($args);
+    foreach ($images as $image) {    
+        $attachmenturl=get_attachment_link($image->ID);
+        $description= $image->post_content;
+        $caption= $image->post_excerpt;
+        $attr = array(
+          // 'class' => "absolute",
+          // 'data-type' => $term->slug
+        );
+        $imageSrc = wp_get_attachment_image_src( $image->ID, 'full', False);
+        $imageSrc = $imageSrc[0];
+        echo '<li><a href='.$attachmenturl.'>';
+        echo '<img src="'.$imageSrc.'">';
+        echo '</a></li>';
+        //echo '<img class="slide absolute transition-margin-left transition-width" data-type="'.$term->slug.'" src="'.$attachmenturl.'"></img>' . "\n";
+    }
+}
+
+/**
+ * Displays the exhibition views
+ * @return string 
+ */
+function getExhibitionViews() {
+    $args = array( 
+    'post_parent' => get_the_ID(),
+    'post_type' => 'attachment',
+    'post_mime_type' => 'image',
+    'attachment_category' => 'view',
+    'posts_per_page'=>-1,
+    'order' => 'asc'
+    );
+    $images  = get_posts($args);
+    foreach ($images as $image) {    
+        $attachmenturl=get_attachment_link($image->ID);
+        $description= $image->post_content;
+        $caption= $image->post_excerpt;
+        $attr = array(
+          // 'class' => "absolute",
+          // 'data-type' => $term->slug
+        );
+        $imageSrc = wp_get_attachment_image_src( $image->ID, 'full', False);
+        $imageSrc = $imageSrc[0];
+        echo '<li><a href='.$attachmenturl.'>';
+        echo '<img src="'.$imageSrc.'">';
+        echo '</a></li>';
+        //echo '<img class="slide absolute transition-margin-left transition-width" data-type="'.$term->slug.'" src="'.$attachmenturl.'"></img>' . "\n";
+    }
+}
+
+function filter_anchors( $content ) {
+  $anchors = array('</a>');
+  $content = str_ireplace( $anchors, '<span aria-hidden="true" data-icon="&#xe003;"></span></a>', $content );
+  return $content;
+}
+
+add_filter( 'the_content', 'filter_anchors' );
 
 /********************************************* METABOX **************************************/
 /**

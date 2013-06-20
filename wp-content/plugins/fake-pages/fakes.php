@@ -61,7 +61,11 @@ Author URI: http://dsagastume.info
     }
  
     // Fake pages' permalinks and titles. Change these to your required sub pages.
+<<<<<<< HEAD
+    $my_exhibition_pages = array(
+=======
     $my_fake_pages = array(
+>>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
         'press' => 'press',
         'works' => 'works',
         'views' => 'views'
@@ -73,10 +77,17 @@ Author URI: http://dsagastume.info
     // Adding fake pages' rewrite rules
     function exh_insertrules($rules)
     {
+<<<<<<< HEAD
+        global $my_exhibition_pages;
+      
+        $newrules = array();
+        foreach ($my_exhibition_pages as $slug => $title)
+=======
         global $my_fake_pages;
       
         $newrules = array();
         foreach ($my_fake_pages as $slug => $title)
+>>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
             $newrules['exhibitions/([^/]+)/' . $slug . '/?$'] = 'index.php?exhibitions=$matches[1]&fpage=' . $slug;
       
         return $newrules + $rules;

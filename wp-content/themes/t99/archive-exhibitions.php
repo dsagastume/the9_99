@@ -1,7 +1,11 @@
 <?php require_header(); ?>
 <?php body_metadata(); ?>
 <div class="content exhibitions">
+<<<<<<< HEAD
+	<h1><?php post_type_archive_title(); ?></h1>
+=======
 	<h1>Current Exhibitions</h1>
+>>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
 	<nav>
 		<ul>
 			<li><a>past</a></li>

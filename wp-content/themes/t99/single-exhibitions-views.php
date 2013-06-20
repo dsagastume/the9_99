@@ -1,4 +1,13 @@
 <?php body_metadata(); ?>
+<<<<<<< HEAD
+	<div class="subcontent views">
+		<nav>
+			<ul>
+			<?php getExhibitionViews(); ?>
+			</ul>
+		</nav>
+	</div>
+=======
 <div class="content exhibition">
 	<h1><?php the_title(); ?></h1>
 	<nav>
@@ -17,3 +26,4 @@
 		</nav>
 	</div>
 </div>
+>>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef

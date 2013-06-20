@@ -5,7 +5,11 @@
 			<nav>
 				<ul style="float:left;">
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+<<<<<<< HEAD
+					<li><a href="<?php echo get_permalink($post->post_parent) ?>"><span aria-hidden="true" data-icon="&#xe000;"></span></a></li>
+=======
 					<li><a href="<?php echo get_permalink($post->post_parent).'works/'; ?>"><span aria-hidden="true" data-icon="&#xe000;"></span> to works</a></li>
+>>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
 				</ul>
 
 				<ul style="float:right;">

@@ -1,6 +1,6 @@
 <?php require_header(); ?>
 <div class="content artist">
-	<h1><?php the_title(); ?></h1>
+	<h1><?php language_the_title(); ?></h1>
 	<nav class="artist_nav">
 		<ul>
 			<li><a href="<?php echo the_permalink().'cv/'; ?>">cv</a></li>

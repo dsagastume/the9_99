@@ -1,0 +1,277 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Pablo Rubio <rubpablo@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+
+msgid "artists"
+msgstr "artistas"
+
+msgid "exhibitions"
+msgstr "exposiciones"
+
+msgid "publications"
+msgstr "publicaciones"
+
+msgid "outdoors"
+msgstr "afuera"
+
+msgid "gallery"
+msgstr "galería"
+
+msgid "contact"
+msgstr "contacto"
+
+msgid "works"
+msgstr "trabajos"
+
+msgid "press"
+msgstr "prensa"
+
+msgid "views"
+msgstr "vistas"
+
+msgid "past"
+msgstr "pasadas"
+
+msgid "current"
+msgstr "actual"
+
+msgid "future"
+msgstr "futuras"
+
+#~ msgid "Socios"
+#~ msgstr "Partners"
+
+#~ msgid "Asociados"
+#~ msgstr "Associates"
+
+#~ msgid "Artículo de Opinión Semanal en Diario La Hora"
+#~ msgstr "Weekly Opinion Article in Diario La Hora"
+
+#~ msgid "Derechos Reservados"
+#~ msgstr "All Rights Reserved"
+
+#~ msgid "Marca Registrada"
+#~ msgstr "Registered Trademark"
+
+#~ msgid "Inicio"
+#~ msgstr "Home"
+
+#~ msgid "Nosotros"
+#~ msgstr "About Us"
+
+#~ msgid "Miembros"
+#~ msgstr "Team"
+
+#~ msgid "Áreas de Práctica"
+#~ msgstr "Practice Areas"
+
+#~ msgid "Alianzas Estratégicas"
+#~ msgstr "Strategic Alliances"
+
+#~ msgid "Alianzas<br/>Estratégicas"
+#~ msgstr "Strategic<br/>Alliances"
+
+#~ msgid "Noticias"
+#~ msgstr "News"
+
+#~ msgid "Servicios en Línea"
+#~ msgstr "Online Services"
+
+#~ msgid "Servicios<br/>en Línea"
+#~ msgstr "Online<br/>Services"
+
+#~ msgid "Oportunidades Profesionales"
+#~ msgstr "Career"
+
+#~ msgid "Oportunidades<br/>Profesionales"
+#~ msgstr "Career"
+
+#~ msgid "Contáctenos"
+#~ msgstr "Contact Us"
+
+#~ msgid "Mapa de Sitio"
+#~ msgstr "Site Map"
+
+#~ msgid "sobre-esta-imagen"
+#~ msgstr "about-this-image"
+
+#~ msgid "Columnas de Opinión"
+#~ msgstr "Opinion column"
+
+#~ msgid "conozca más sobre nuestros servicios"
+#~ msgstr "more about our services"
+
+#~ msgid "conozca más sobre nuestras alianzas"
+#~ msgstr "more about our alliances"
+
+#~ msgid "conozca más"
+#~ msgstr "more"
+
+#~ msgid "Inglés"
+#~ msgstr "English"
+
+#~ msgid "inicio"
+#~ msgstr "home"
+
+#~ msgid "Equipo"
+#~ msgstr "Team"
+
+#~ msgid "Conoce más<br/>acerca de Alegalis"
+#~ msgstr "Learn more<br/>about Alegalis"
+
+#~ msgid "Servicios en<br/>Línea"
+#~ msgstr "Online<br/>Services"
+
+#~ msgid "Leer más"
+#~ msgstr "Read more"
+
+#~ msgid "Todas las<br/>publicaciones"
+#~ msgstr "All publications"
+
+#~ msgid "Opinión"
+#~ msgstr "Opinion"
+
+#~ msgid "Publicaciones<br>Recomendadas"
+#~ msgstr "Suggested<br/>Publications"
+
+#~ msgid "Publicaciones y<br/>Artículos"
+#~ msgstr "Publications<br/>and Articles"
+
+#~ msgid "buscar"
+#~ msgstr "search"
+
+#~ msgid "Ver la nota completa"
+#~ msgstr "See complete note"
+
+#~ msgid "Usuarios Confia"
+#~ msgstr "Confia Users"
+
+#~ msgid "usuario"
+#~ msgstr "user"
+
+#~ msgid "contraseña"
+#~ msgstr "password"
+
+#~ msgid ""
+#~ "Si aún no cuenta con usuario y contraseña puede registrarse con nosotros "
+#~ "enviando un correo a la dirección:"
+#~ msgstr ""
+#~ "If you do not have username and password you can register with us by "
+#~ "sending an email to:"
+
+#~ msgid "Nombre"
+#~ msgstr "Name"
+
+#~ msgid "Correo"
+#~ msgstr "Mail"
+
+#~ msgid "Teléfono"
+#~ msgstr "Phone Number"
+
+#~ msgid "Asunto"
+#~ msgstr "Subject"
+
+#~ msgid "País"
+#~ msgstr "Country"
+
+#~ msgid "Mensaje"
+#~ msgstr "Message"
+
+#~ msgid "Código de Seguridad"
+#~ msgstr "Security Code"
+
+#~ msgid "Limpiar"
+#~ msgstr "Reset"
+
+#~ msgid "Enviar"
+#~ msgstr "Send"
+
+#~ msgid "Más"
+#~ msgstr "More"
+
+#~ msgid "Escríbenos a:"
+#~ msgstr "Write us:"
+
+#~ msgid "entrar"
+#~ msgstr "login"
+
+#~ msgid "Publicaciones y Artículos"
+#~ msgstr "Publications and Articles"
+
+#~ msgid "ver todas las publicaciones"
+#~ msgstr "view all publications"
+
+#~ msgid "ver todas las noticias"
+#~ msgstr "view all news"
+
+#~ msgid "Socio Fundador"
+#~ msgstr "Founding Partner"
+
+#, fuzzy
+#~ msgid "Detalle de las barandas de la catedral metropolitana"
+#~ msgstr "Detail of the railings of the metropolitan capital"
+
+#~ msgid "Detalle de las columnas del Portal del Comercio"
+#~ msgstr "Columns detail Commerce Portal"
+
+#~ msgid "Detalle de los pisos del Pasaje Rubio"
+#~ msgstr "Floor detail from Pasaje Rubio"
+
+#~ msgid "Remaches de bronce, Palacio Nacional"
+#~ msgstr "Brass rivets, National Palace"
+
+#~ msgid "Detalle de las columnas del Palacio Nacional"
+#~ msgstr "Detail of the columns of the National Palace"
+
+#~ msgid "Vitral del interior del Palacio Nacional"
+#~ msgstr "Stained glass inside the National Palace"
+
+#~ msgid "Desarrollo Inmobiliario"
+#~ msgstr "Real Estate Development"
+
+#~ msgid "Corporativo"
+#~ msgstr "Corporate Law"
+
+#~ msgid "Energía"
+#~ msgstr "Energy"
+
+#~ msgid "Fiscal"
+#~ msgstr "Tax Law"
+
+#~ msgid "Laboral"
+#~ msgstr "Labor Law"
+
+#~ msgid "Litigio"
+#~ msgstr "Litigation"
+
+#~ msgid "Negocios Internacionales"
+#~ msgstr "International Economic Law"
+
+#~ msgid "Notariado"
+#~ msgstr "Notarial Services"
+
+#~ msgid "Pro Bono Público"
+#~ msgstr "Pro Bono"
+
+#~ msgid "Propiedad Intelectual"
+#~ msgstr "Intellectual Property"
+
+#~ msgid "Introducción"
+#~ msgstr "Profile"
+
+#~ msgid "Principios"
+#~ msgstr "Team Values"
+
+#~ msgid "Testimonios"
+#~ msgstr "Testimonials"
+
+#~ msgid "VER LA NOTA COMPLETA"
+#~ msgstr "SEE COMPLETE NOTE"

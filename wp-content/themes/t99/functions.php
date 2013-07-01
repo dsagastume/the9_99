@@ -1,5 +1,7 @@
 <?php
 
+require_once 'functions-language.php' ;
+
 add_theme_support( "post-thumbnails" );
 
 function wordpress_head_cleanup() {
@@ -27,6 +29,9 @@ function t99_init () {
   /**
   * Registrar tamaño de imagen
   */
+
+  load_theme_textdomain ( 't99' , get_template_directory () . '/languages' ) ;
+
   add_image_size( 'single-thumb', 248, 181, true );
   
   /**
@@ -133,7 +138,6 @@ function theme_url ( $path = '' ) {
 function ajax () {
   return ( ! empty ( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && strtolower ( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) == 'xmlhttprequest') ||
       ! empty ( $_REQUEST[ 'action' ] ) || ! empty ( $_REQUEST[ 'ajax' ] ) ;
-
 }
 
 /**
@@ -230,13 +234,14 @@ function t99_scripts_styles () {
   wp_enqueue_style ( 'fonts-style', 'http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,600') ;
   wp_enqueue_style ( 't99-style', get_stylesheet_uri (), array ('fonts-style')) ;
   //wp_enqueue_style ( 'vegas-style', get_template_directory_uri ().'/css/vendor/jquery.vegas.css') ;
-
+  wp_enqueue_script ( 'mootools-core' , get_template_directory_uri () . '/js/vendor/mootools-core-1.4.5.js' , array ( 'jquery' ) , '1.4.5' , false ) ;
+  wp_enqueue_script ( 'mootools-more' , get_template_directory_uri () . '/js/vendor/mootools-more-1.4.0.1.js' , array ( 'mootools-core' ) , '1.4.0.1' , false ) ;
   //wp_enqueue_script ( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', array ( ) ) ;
   wp_enqueue_script ( 'jquery-ui-min', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js', array ('jquery') ) ;
 
   //wp_enqueue_script ( 'vegas-script', get_template_directory_uri () . '/js/vendor/jquery.vegas.js', array ('jquery') ) ;
-
-  wp_enqueue_script ( 't99-script', get_template_directory_uri () . '/js/main.js', array ('jquery') ) ;
+ 
+  wp_enqueue_script ( 't99-script', get_template_directory_uri () . '/js/main.js', array ('mootools-more') ) ;
   
 
 }
@@ -377,13 +382,10 @@ function getArtistWorks() {
     }
 }
 
-<<<<<<< HEAD
 /**
  * Prints the exhibition items
  * @return html
  */
-=======
->>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
 function getExhibitionItems() {
     $args = array( 
     'post_type' => 'exhibitions',
@@ -393,7 +395,7 @@ function getExhibitionItems() {
     $exhibitions  = get_posts($args);
     foreach ($exhibitions as $exhibition) {    
         $exhibitionUrl=get_permalink($exhibition->ID);
-        $title= get_the_title($exhibition->ID);
+        $title= language_get_the_title($exhibition->ID);
         $date = get_post_meta ( $exhibition->ID, '_data_input', true );
         $attr = array(
           // 'class' => "absolute",
@@ -544,4 +546,42 @@ function data_get_the_content ( $post_id = null ) {
  */
 function data_the_content ( $post_id ) {
   echo data_get_the_content ( $post_id );
+}
+
+function get_next_image($size = 'thumbnail', $text = false) {
+  $post = get_post();
+  $attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
+
+  foreach ( $attachments as $k => $attachment )
+    if ( $attachment->ID == $post->ID )
+      break;
+
+  $k = $k + 1;
+  if ($k == count($attachments)) $k=0;
+
+  $output = $attachment_id = null;
+  if ( isset( $attachments[ $k ] ) ) {
+    $attachment_id = $attachments[ $k ]->ID;
+    $output = wp_get_attachment_link( $attachment_id, $size, true, false, $text );
+  }
+  echo $output;
+}
+
+function get_prev_image($size = 'thumbnail', $text = false) {
+  $post = get_post();
+  $attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
+
+  foreach ( $attachments as $k => $attachment )
+    if ( $attachment->ID == $post->ID )
+      break;
+
+  $k = $k - 1;
+  if ($k == -1) $k=count($attachments)-1 ;
+
+  $output = $attachment_id = null;
+  if ( isset( $attachments[ $k ] ) ) {
+    $attachment_id = $attachments[ $k ]->ID;
+    $output = wp_get_attachment_link( $attachment_id, $size, true, false, $text );
+  }
+  echo $output;
 }

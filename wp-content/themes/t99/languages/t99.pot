@@ -1,0 +1,43 @@
+"POT-Creation-Date: 2012-07-01 15:18:15 00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-07-01 HO:MI ZONE\n"
+"Last-Translator: Paulo Chang \n"
+"Language-Team: LANGUAGE \n"
+
+msgid "artists"
+msgstr ""
+
+msgid "exhibitions"
+msgstr ""
+
+msgid "publications"
+msgstr ""
+
+msgid "outdoors"
+msgstr ""
+
+msgid "gallery"
+msgstr ""
+
+msgid "contact"
+msgstr ""
+
+msgid "works"
+msgstr ""
+
+msgid "press"
+msgstr ""
+
+msgid "views"
+msgstr ""
+
+msgid "past"
+msgstr ""
+
+msgid "current"
+msgstr ""
+
+msgid "future"
+msgstr ""

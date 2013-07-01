@@ -1,3 +1,4 @@
+@import url('css/spinner.css');
 /* ============= global ============= */
 
 @font-face {
@@ -44,6 +45,10 @@ ul {
 a {
 	cursor:pointer;
 	text-decoration:none;
+}
+
+span {
+	color: #111;
 }
 
 /* ============= header ============= */
@@ -125,7 +130,6 @@ a {
 	font-weight:600;
 	text-transform:uppercase;
 }
-
 .subcontent {
 	float:left;
 	width:100%;

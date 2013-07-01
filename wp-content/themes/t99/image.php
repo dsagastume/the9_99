@@ -5,16 +5,12 @@
 			<nav>
 				<ul style="float:left;">
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-<<<<<<< HEAD
 					<li><a href="<?php echo get_permalink($post->post_parent) ?>"><span aria-hidden="true" data-icon="&#xe000;"></span></a></li>
-=======
-					<li><a href="<?php echo get_permalink($post->post_parent).'works/'; ?>"><span aria-hidden="true" data-icon="&#xe000;"></span> to works</a></li>
->>>>>>> e2e9ae48d7284b03dbd35c4040ef9b5c272d8bef
 				</ul>
 
 				<ul style="float:right;">
-					<li><?php previous_image_link(false, '<span aria-hidden="true" data-icon="&#xe001;"><span>'); ?> </li>
-					<li><?php next_image_link(false, '<span aria-hidden="true" data-icon="&#xe002;"><span>'); ?></li>
+					<li><?php get_prev_image(false, '<span aria-hidden="true" data-icon="&#xe001;"><span>'); ?> </li>
+					<li><?php get_next_image(false, '<span aria-hidden="true" data-icon="&#xe002;"><span>'); ?></li>
 				</ul>
 				<div syle="clear:both;"></div>
 			</nav>
@@ -27,7 +23,7 @@
 
 
 		<div class="work-bottom">
-		<p><span><?php the_title(); ?></span>, <?php echo get_the_content() ?></p>
+		<p><span><?php language_the_title(); ?></span>, <?php echo language_get_the_excerpt() ?></p>
 		</div>	
 <?php endwhile; ?>
 

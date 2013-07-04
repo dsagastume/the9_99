@@ -21,32 +21,16 @@ Server.url.admin = '<?php echo admin_url (); ?>' ;
 Server.url.ajax = '<?php echo admin_url ( 'admin-ajax.php' ); ?>' ;
 </script>
 <?php wp_head (); ?>        
-<?php
-if ( is_home() || is_page( $page = 'gallery' ) ) {
-?>
 <script type="text/javascript" src="<?php echo theme_url ('js/vendor/jquery.backstretch.min.js'); ?>"></script>
-<?php 
-} 
-?>
-<?php
-if ( is_home() ) {
-	getSlideScript(); 
-} 
-if (is_page( $page = 'gallery' )) {
-	getGalleryScript();
-}
-if (is_page( $page = 'contact' )) {
-	getContactScript();
-}
-?>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </head>
 <body <?php body_class (); ?> data-language="<?php bloginfo ( 'language' ); ?>">
 <div id="header">            
 <a id="logo" href="<?php echo site_url (); ?>"><span>the 9.99</span></a>        
 
 <ul class="lang-nav">
-    <li><a  href="?lan=en">eng</a></li>
-    <li><a  href="?lan=es">esp</a></li>
+    <li><a class="display-block float-left language-link border-right" href="?lan=es"><?php _e ( 'esp' , 't99' ) ; ?></a></li>
+    <li><a class="display-block float-left language-link border-right" href="?lan=en"><?php _e ( 'eng' , 't99' ) ; ?></a></li>
 </ul>
 
 <a id="nav_toggle"><span>menu</span></a>            
@@ -61,4 +45,4 @@ if (is_page( $page = 'contact' )) {
 </ul>
 </nav>
 </div>
-<div id="main-content">
+<div id="main-content" style="min-height: 650px;">

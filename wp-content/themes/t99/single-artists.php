@@ -3,9 +3,9 @@
 	<h1><?php language_the_title(); ?></h1>
 	<nav class="artist_nav">
 		<ul>
-			<li><a href="<?php echo the_permalink().'cv/'; ?>">cv</a></li>
-			<li><a href="<?php echo the_permalink().'works/'?>">works</a></li>
-			<li><a href="<?php echo the_permalink().'press/'?>">press</a></li>
+			<li><a href="<?php echo the_permalink().'cv/'; ?>"><?php _e ( 'cv' , 't99' ) ; ?></a></li>
+			<li><a href="<?php echo the_permalink().'works/'?>"><?php _e ( 'works' , 't99' ) ; ?></a></li>
+			<li><a href="<?php echo the_permalink().'press/'?>"><?php _e ( 'press' , 't99' ) ; ?></a></li>
 		</ul>
 	</nav>
 <?php 

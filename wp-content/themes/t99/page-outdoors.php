@@ -1,4 +1,5 @@
 <?php require_header(); ?>
+		<?php body_metadata(); ?>	
 <div class="content">
 	<h1><?php language_the_title(); ?></h1>
 	<div class="subcontent outdoors">

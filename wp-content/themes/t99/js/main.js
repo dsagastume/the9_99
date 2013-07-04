@@ -11,90 +11,90 @@ var T99 = T99 || { } ;
  */
 T99.history = ( function () {
 
-  var history = { } ;
+  var history = { };
 
   /**
-   * Stores functions for applying when the module has
+   * Stores functions for applying when the module has 
    * completed a content loading request.
    */
-  history.events = { } ;
+  history.events = { };
 
   /**
    * Initializes the History Module.
-   *
+   * 
    * @returns {undefined}
    */
   history.initialize = function () {
     if ( ! history.hasPushState () ) {
-      return ;
+      return;
     }
 
     // stablished the content holding DOM Element
-    history.element = document.id ( 'content' ) ;
-    history.scroll = new Fx.Scroll ( document.body ) ;
+    history.element = document.id ( 'main-content' );
+    history.scroll = new Fx.Scroll ( document.body );
 
     if ( history.element ) {
-      history.createRequestObject () ;
-      history.addEventHandlers () ;
-      history.addPopStateHandler () ;
+      history.createRequestObject ();
+      history.addEventHandlers ();
+      history.addPopStateHandler ();
 
-      history.fireEvent ( 'complete' ) ;
-      history.pushState( window.location.href);
+      history.fireEvent ( 'complete' );
+      history.pushState ( window.location.href );
     }
-  } ;
+  };
 
   /**
    * Attaches the event listeners for specific history events.
-   *
+   * 
    * @returns {undefined}
    */
   history.addPopStateHandler = function ( ) {
-    Element.NativeEvents.popstate = 2 ;
-    document.id ( window ).addEvent ( 'popstate', history.popStateHandler ) ;
-  } ;
+    Element.NativeEvents.popstate = 2;
+    document.id ( window ).addEvent ( 'popstate', history.popStateHandler );
+  };
 
   /**
    * Handler the PopState event.
-   *
+   * 
    * @param {DOMEvent} event the PopState event.
    * @returns {undefined}
    */
   history.popStateHandler = function ( event ) {
-    if (event.event.state &&  event.event.state.href) {
+    if ( event.event.state && event.event.state.href ) {
       history.request.send ( {
         url : event.event.state.href
-      } ) ;
+      } );
     }
-  } ;
+  };
 
   /**
    * Adds an event handling function.
-   *
+   * 
    * @param {String} event the event name
    * @param {Function} handler the function to call when the event is fired
    * @returns {undefined}
    */
   history.addEvent = function ( event, handler ) {
     if ( typeOf ( history.events[ event ] ) !== 'array' ) {
-      history.events[ event ] = [ ] ;
+      history.events[ event ] = [ ];
     }
-    history.events[ event ].push ( handler ) ;
-  } ;
+    history.events[ event ].push ( handler );
+  };
 
   /**
    * Event handler for the Request.HTML.onSend event.
-   *
+   * 
    * @returns {undefined}
    */
   history.requestSend = function ( ) {
-    history.scroll.toTop () ;
-    history.element.spin () ;
-    history.fireEvent ( 'send' ) ;
-  } ;
+    history.scroll.toTop ();
+    history.element.spin ();
+    history.fireEvent ( 'send' );
+  };
 
   /**
    * Fires an event from the history object.
-   *
+   * 
    * @param {type} event
    * @returns {undefined}
    */
@@ -102,34 +102,34 @@ T99.history = ( function () {
     if ( typeOf ( history.events[ event ] ) === 'array' ) {
       history.events[ event ].each ( function ( handler ) {
         if ( typeOf ( handler ) === 'function' ) {
-          handler.apply ( history.element ) ;
+          handler.apply ( history.element );
         }
-      } ) ;
+      } );
     }
-  } ;
+  };
 
   /**
    * Event handler for the Request.HTML.onComplete event.
-   *
+   * 
    * @returns {undefined}
    */
   history.requestComplete = function ( ) {
     // update document.body from metadata DOMElement
-    var bodyMetadata = history.element.getElement ( '#body-metadata' ) ;
+    var bodyMetadata = history.element.getElement ( '#body-metadata' );
     if ( bodyMetadata ) {
-      document.id ( document.body ).set ( 'class', bodyMetadata.get ( 'class' ) ) ;
-      document.id ( document ).title = bodyMetadata.get ( 'data-title' ) ;
+      document.id ( document.body ).set ( 'class', bodyMetadata.get ( 'class' ) );
+      document.id ( document ).title = bodyMetadata.get ( 'data-title' );
     }
 
-    history.fireEvent ( 'complete' ) ;
-    history.element.get ( 'spinner' ).position () ;
-    history.element.unspin () ;
-  } ;
+    history.fireEvent ( 'complete' );
+    history.element.get ( 'spinner' ).position ();
+    history.element.unspin ();
+  };
 
   /**
-   * Initializes the Request.HTML instance that will be used
+   * Initializes the Request.HTML instance that will be used 
    * throught the aplication life.
-   *
+   * 
    * @returns {undefined}
    */
   history.createRequestObject = function ( ) {
@@ -141,78 +141,91 @@ T99.history = ( function () {
       },
       onRequest : history.requestSend,
       onComplete : history.requestComplete
-    } ) ;
-  } ;
+    } );
+  };
 
   /**
    * Computes if the current browser supports the HTML5 History API.
-   *
-   * @returns {Boolean} <code>true</code> if the crouwser supports
+   * 
+   * @returns {Boolean} <code>true</code> if the crouwser supports 
    * the HTML5 History API and <code>false</code> otherwise.
    */
   history.hasPushState = function () {
-    var windowHistory = window.history ;
-    return ( 'pushState' in windowHistory ) ;
-  } ;
+    var windowHistory = window.history;
+    return ( 'pushState' in windowHistory );
+  };
 
   /**
    * Loads a specific address into the module's content element.
-   *
+   * 
    * @param {String} href the resource's URL
    * @returns {undefined}
    */
   history.loadContent = function ( href ) {
-    history.pushState ( href ) ;
+    $('.backstretch').remove();
+    if (typeof(window.myBG)!=='undefined'){ 
+       //window.myBG.destroy(); 
+      }
+    var query = href.replace ( Server.url.home, '' );
+    history.pushState ( href );
     history.request.send ( {
       url : href
-    } ) ;
-  } ;
+    } );
+
+    try {
+      console.log ( '-- track page view: ' + query );
+      ga ( 'send', 'pageview', query );
+    } catch ( ex ) {
+      // no page tracking event allowed
+    }
+  };
 
   /**
    * Pushes the new state of the Application into the History stack.
-   *
+   * 
    * @param {String} href the address to show in the Browser's NavBar.
    * @param {Object} state the state to push to the history stack.
    * @returns {undefined}
    */
   history.pushState = function ( href, state ) {
-    state = state || { } ;
-    state.href = href ;
-    window.history.pushState ( state, null, href ) ;
-  } ;
+    state = state || { };
+    state.href = href;
+    window.history.pushState ( state, null, href );
+  };
 
   /**
    * Hadles the click event delegation for selected anchors.
-   *
+   * 
    * @param {DOMEvent} event the click event
    * @param {Element} target the clicked element
    * @returns {undefined}
    */
   history.clickEventHandler = function ( event, target ) {
     var href = target.get ( 'href' ),
-      uri = new URI( href ) ;
-    //uri.setData ( 'lan', document.id ( document.body ).get ( 'data-language' ).substr ( 0, 2 ) ) ;
-    history.loadContent ( uri.toString () ) ;
-    event.stop () ;
+      uri = new URI ( href );
+    uri.setData ( 'lan', document.id ( document.body ).get ( 'data-language' ).substr ( 0, 2 ) );
+    history.loadContent ( uri.toString () );
+    event.stop ();
 
-  } ;
+  };
 
   /**
    * Attached the event listeners for specific anchor elements.
-   *
+   * 
    * @returns {undefined}
    */
   history.addEventHandlers = function () {
-    var not = '.unprocessable-link, [target=_blank], [href^=' + Server.url.admin + '], [href^=' + Server.url.login + ']',
+    var not = '.language-link, [target=_blank], [href^=' + Server.url.admin + '], [href^=' + Server.url.login + ']',
       relay = 'a[href^=' + Server.url.site + ']:not(' + not + ')',
-      selector = 'click:relay(' + relay + ')' ;
-    document.id ( document.body ).addEvent ( selector, history.clickEventHandler ) ;
-  } ;
+      selector = 'click:relay(' + relay + ')';
+      console.log(selector);
+    document.id ( document.body ).addEvent ( selector, history.clickEventHandler );
+  };
 
   // star the mdule on domreacy event
-  document.id ( window ).addEvent ( 'domready', history.initialize ) ;
+  document.id ( window ).addEvent ( 'domready', history.initialize );
 
   // return the public interface
-  return history ;
+  return history;
 
-} ( ) ) ;
+} ( ) );

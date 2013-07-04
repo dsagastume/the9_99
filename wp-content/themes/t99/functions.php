@@ -32,7 +32,7 @@ function t99_init () {
 
   load_theme_textdomain ( 't99' , get_template_directory () . '/languages' ) ;
 
-  add_image_size( 'single-thumb', 248, 181, true );
+  add_image_size( 'single-thumb', 248, 180, true );
   
   /**
    * Create "Artists" Post Type
@@ -262,9 +262,9 @@ function getSlideScript() {
     $images  = get_posts($args);
     if (!empty($images))  {
       ?>
-        <script>
+        <script class="deleteableScript">
           $(document).ready(function() {
-            $.backstretch([             
+            window.myBG=$("body").backstretch([             
       <?php
       foreach ($images as $image) {    
         $attachmenturl=wp_get_attachment_url($image->ID);
@@ -298,7 +298,7 @@ function getGalleryScript() {
     $images  = get_posts($args);
     if (!empty($images))  {
       ?>
-        <script>
+        <script class="deleteableScript">
           $(document).ready(function() {
             $(".gallery-images").backstretch([             
       <?php
@@ -323,7 +323,6 @@ echo '    "'.$imageSrc.'",'."\n";
 
 function getContactScript() {
   ?>
-  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
 $(document).ready(function(e) {
 if ($("#map").length == 1) {
@@ -373,7 +372,7 @@ function getArtistWorks() {
           // 'class' => "absolute",
           // 'data-type' => $term->slug
         );
-        $imageSrc = wp_get_attachment_image_src( $image->ID, 'full', False);
+        $imageSrc = wp_get_attachment_image_src( $image->ID, 'single-thumb', False);
         $imageSrc = $imageSrc[0];
         echo '<li><a href='.$attachmenturl.'>';
         echo '<img src="'.$imageSrc.'">';

@@ -125,7 +125,7 @@
      $language = $_GET[ 'lan' ] ;
    } else if ( isset ( $_POST[ 'lan' ] ) ) {
      $language = $_POST[ 'lan' ] ;
-   } else {
+   } else if ( !isset($GLOBALS[ 'language_theme_locale' ])) {
      $language = 'en' ; //$options[ 'default_language' ] ;
    }
 

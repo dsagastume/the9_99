@@ -1,4 +1,8 @@
 <?php require_header(); ?>
+<?php
+	getContactScript();
+?>
+		<?php body_metadata(); ?>	
 <div class="content contact">
 	<h1><?php language_the_title() ?></h1>
 	<br>

@@ -1,4 +1,9 @@
 <?php require_header(); ?>
+		<?php body_metadata(); ?>	
+
+<?php
+	getGalleryScript();
+?>
 <div class="content">
 	<h1><?php language_the_title() ?></h1>
 

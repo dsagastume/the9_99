@@ -22,7 +22,7 @@
 <div class="subcontent publications">
 
 <div class="publication">
-<div>
+<div class="publication-image">
 <img src="singular_plurality.jpg">
 </div>
 <div class="publication-text">
@@ -41,7 +41,7 @@ texts by: thomas b.f. cummins, kevin power, doris sommer, christian viveros-faun
 </div>
 
 <div class="publication">
-<div style="float:left;">
+<div class="publication-image">
 <img src="objetos_en_transito.jpg">
 </div>
 <div style="float:left; padding:0 10px;">

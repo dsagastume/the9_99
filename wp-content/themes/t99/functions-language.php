@@ -23,6 +23,7 @@
    $options[ 'post_types' ][ ] = 'page' ;
    $options[ 'post_types' ][ ] = 'artists' ;
    $options[ 'post_types' ][ ] = 'exhibitions' ;
+   $options[ 'post_types' ][ ] = 'publications' ;
 
    return $options ;
  }

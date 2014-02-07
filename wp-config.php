@@ -42,14 +42,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         ',Ss_/H4Z}Aqi -Gg8Q.{(KOcO0Z$UCoRIx2Im|RU09-/DZ+s7n~V~AAZkw-F!Vk!');
-define('SECURE_AUTH_KEY',  'Mpb_{9#qmF>DwkQ<D[gW-RX|[>SFoV`Y(64-OV.-3xc-nV-lWVLjOcWI_x#M-R#%');
-define('LOGGED_IN_KEY',    'X H%,Y8C#_&RN~8cty2,,tHs0-b1)mc v3qE)x)bm-<${{tDr#pXP#W~$W@*N j@');
-define('NONCE_KEY',        '$(E^1;-e3G@Ay7Eo]M4JhdLcew=P. :=&CPZmPHTw5l[wDzh;% ||F4)U@u@5g7f');
-define('AUTH_SALT',        'SK[z6|p oyi[$tNp39zhJgoGN6]cJo+L8*~MF;8(oC<lzH&1dPvZDije9!+El#Wa');
-define('SECURE_AUTH_SALT', 'a);q)+d3O<)UX{)rT=.@hD^X`0=,{cvseH=YtA+6SkkYZ{[8O&v_r2tO,H3%Rn,B');
-define('LOGGED_IN_SALT',   '85N+NFMX&O;$51EQZw1GzHL:p}i_domia<PU23{t(uDC2098Ts5M%s-RR-Aq/tK4');
-define('NONCE_SALT',       '6niWl/dIJR_.!tzuV7&S>jnY[o[d#`C>k4l>jTm6c3LFJBd*voZ=fc:ve|-W6[O:');
+define('AUTH_KEY',         't|EW=K&-M$|Y0zO/(#egM*+X@3<Uu|O}F)[:R1~8N*5fB[TJC(r3|era4Af<0_*v');
+define('SECURE_AUTH_KEY',  'V|G.XFWl|B~`Ft.P{6/IK#k&hdKK]@n>_QSsxJ3>~%veNs K-pvG^i&5w>hgej8~');
+define('LOGGED_IN_KEY',    'SFX?69Es!FEB7zPqfTLVv8-s1-{(Xy6m6)HM;mI{]Oe%.h=a{)JbsVP@0YG}A;hK');
+define('NONCE_KEY',        '22q=2n|cr^J[1^}jbBKN_B5&Z[I+(r)|+$D3:^07oMk,x~G!jg& *Bn`UO|i=@t|');
+define('AUTH_SALT',        'zKNN^6WG=w|(Zj5=a&fj>W(5 X>%B|xai8}p3oPGHxGi2* 5(lM-hiN`|b8+2|3t');
+define('SECURE_AUTH_SALT', ',j![oKnlu@E0;ZNYbn@8:sH9cvb}tNge+14b2kv]<sm!{T[RH6o-`;O14Am44>nw');
+define('LOGGED_IN_SALT',   '*n+gPY]D9%+el+H^gWtc)fLuoI-u//3Vx-_Qc$9QK9LzUr]`-@aDi16RlJu3@bY_');
+define('NONCE_SALT',       'ELF+sh}<~h6:nHIrB;Q!T;t[q>V{Z~&NE2QrLJYsp<tyJD{G|w+Eo^vP<lcV+C >');
 
 /**#@-*/
 
@@ -69,7 +69,7 @@ $table_prefix  = 'wp_';
  * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
  * language support.
  */
-define('WPLANG', 'en_US');
+define('WPLANG', '');
 
 /**
  * For developers: WordPress debugging mode.
@@ -78,7 +78,7 @@ define('WPLANG', 'en_US');
  * It is strongly recommended that plugin and theme developers use WP_DEBUG
  * in their development environments.
  */
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 
 /* That's all, stop editing! Happy blogging. */
 

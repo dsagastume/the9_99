@@ -14,7 +14,7 @@ msgid "artists"
 msgstr "artistas"
 
 msgid "exhibitions"
-msgstr "exposiciones"
+msgstr "exhibiciones"
 
 msgid "publications"
 msgstr "publicaciones"

@@ -9,6 +9,44 @@ var T99 = T99 || { } ;
  *
  * @type Object
  */
+
+T99.mobile = ( function () {
+
+  var mobile = { };
+
+  mobile.initialize = function () {
+    
+      
+    var myToggle = document.id('nav_toggle');
+    myToggle.addEvent('click', function () {
+      var myNav = document.id('main-menu');
+      var myStyle = myNav.getProperty('style');
+      mobile.element = document.id ( 'main-content' );
+        if ((myStyle==null) || (myStyle=='')) {
+        myNav.setProperty('style', "display:block");
+        } else {
+          myNav.removeProperty('style');
+        };
+    });
+
+    var myNav = document.id('main-menu');
+    var myAnchors = myNav.getElements('a');
+    myAnchors.each(function(el){
+      el.addEvent('click', function() {
+        if (Modernizr.mq('only screen and (max-width: 720px)')){
+          var myNav = document.id('main-menu');
+          myNav.removeProperty('style'); 
+        }
+      });
+    });//Mootools 1.2
+  };
+
+  document.id ( window ).addEvent ( 'domready', mobile.initialize );
+ 
+  return mobile; 
+
+} () )
+
 T99.history = ( function () {
 
   var history = { };
@@ -31,6 +69,7 @@ T99.history = ( function () {
 
     // stablished the content holding DOM Element
     history.element = document.id ( 'main-content' );
+    history.logo = document.id ('logo');
     history.scroll = new Fx.Scroll ( document.body );
 
     if ( history.element ) {
@@ -68,6 +107,28 @@ T99.history = ( function () {
   };
 
   /**
+   * Creates styles to replace hover action
+   * 
+   * @param {css} the css content
+   * @param {id} the style element id
+   * @returns {undefined}
+   */
+  history.createStyle = function(css, id) {
+        try {
+            if (document.id(id) && id) return;
+
+            var style = new Element('style', {id: id||'',type:'text/css'}).inject(document.getElements('head')[0]);
+            if (Browser.ie)
+                style.styleSheet.cssText = css;
+            else
+                style.set('text', css);
+
+        } catch(e) {
+            //console.log("failed:", e);
+        }
+    }
+
+  /**
    * Adds an event handling function.
    * 
    * @param {String} event the event name
@@ -88,7 +149,10 @@ T99.history = ( function () {
    */
   history.requestSend = function ( ) {
     history.scroll.toTop ();
-    history.element.spin ();
+    //history.element.spin ();
+    //history.logo.setProperty('style', 'background-image:'.concat(Server.url.theme.concat('/img/loader.gif')));
+    history.logo.setStyle('background-image', 'url('.concat(Server.url.theme.concat('/img/loader.gif)')));
+    history.createStyle('#logo:hover { background-color:#111;}','myStyle');
     history.fireEvent ( 'send' );
   };
 
@@ -122,8 +186,11 @@ T99.history = ( function () {
     }
 
     history.fireEvent ( 'complete' );
-    history.element.get ( 'spinner' ).position ();
-    history.element.unspin ();
+    history.logo.setStyle('background-image', 'url('.concat(Server.url.theme.concat('/img/logo.png)')));
+    $('#myStyle').remove();
+    //history.element.get ( 'spinner' ).position ();
+    //history.logo.setStyle('background', Server.url.theme.concat('img/logo.png center no-repeat'));
+    //history.element.unspin ();
   };
 
   /**
@@ -173,7 +240,6 @@ T99.history = ( function () {
     } );
 
     try {
-      console.log ( '-- track page view: ' + query );
       ga ( 'send', 'pageview', query );
     } catch ( ex ) {
       // no page tracking event allowed
@@ -193,6 +259,12 @@ T99.history = ( function () {
     window.history.pushState ( state, null, href );
   };
 
+  history.getVar = function (name){
+   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+      return decodeURIComponent(name[1]);
+  };
+
+
   /**
    * Hadles the click event delegation for selected anchors.
    * 
@@ -202,24 +274,40 @@ T99.history = ( function () {
    */
   history.clickEventHandler = function ( event, target ) {
     var href = target.get ( 'href' ),
-      uri = new URI ( href );
-    uri.setData ( 'lan', document.id ( document.body ).get ( 'data-language' ).substr ( 0, 2 ) );
+      uri = new URI ( href ),
+      myBody = document.id ( document.body );
+    uri.setData ( 'lan', myBody.get ( 'data-language' ).substr ( 0, 2 ) );
     history.loadContent ( uri.toString () );
     event.stop ();
 
   };
 
+  // history.languageEventHandler = function ( event, target ) {
+  //   var myBody = document.id ( document.body );
+  //   if (myBody.hasClass('single-attachment')) {
+  //     var href = target.get ( 'href' ),
+  //     uri = new URI ( href );
+  //     console.log ('es attachment');
+  //     if (typeof(history.getVar('category'))!="undefined") {
+  //       uri.setData('category', history.getVar('category'));
+  //     } else if (typeof(history.getVar('parent'))!="undefined") {
+  //       uri.setData('parent', history.getVar('parent'));
+  //     }
+  //   history.loadContent ( uri.toString () );
+  //   event.stop();
+  //   }
+  // };  
   /**
    * Attached the event listeners for specific anchor elements.
    * 
    * @returns {undefined}
    */
   history.addEventHandlers = function () {
-    var not = '.language-link, [target=_blank], [href^=' + Server.url.admin + '], [href^=' + Server.url.login + ']',
+    var not = '.unprocessable-link, .language-link, [target=_blank], [href^=' + Server.url.admin + '], [href^=' + Server.url.login + ']',
       relay = 'a[href^=' + Server.url.site + ']:not(' + not + ')',
       selector = 'click:relay(' + relay + ')';
-      console.log(selector);
     document.id ( document.body ).addEvent ( selector, history.clickEventHandler );
+    //document.id ( document.body ).addEvent ( 'click:relay(.language-link)', history.languageEventHandler );
   };
 
   // star the mdule on domreacy event
